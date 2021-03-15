@@ -52,7 +52,7 @@ namespace NerdStore.Catalogo.Domain
 
         public void Dispose()
         {
-            _produtoRepository.Dispose();
+            _produtoRepository?.Dispose();
         }
     }
 }
