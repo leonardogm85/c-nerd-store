@@ -8,7 +8,7 @@ namespace NerdStore.Catalogo.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.HasKey(p => p.Nome);
+            builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Nome)
                 .IsRequired()
@@ -40,23 +40,4 @@ namespace NerdStore.Catalogo.Data.Mappings
             builder.ToTable("Produtos");
         }
     }
-
-    public class CategoriaMapping : IEntityTypeConfiguration<Categoria>
-    {
-        public void Configure(EntityTypeBuilder<Categoria> builder)
-        {
-            builder.HasKey(c => c.Nome);
-
-            builder.Property(c => c.Nome)
-                .IsRequired()
-                .HasColumnType("varchar(250)");
-
-            builder.HasMany(c => c.Produtos)
-                .WithOne(p => p.Categoria)
-                .HasForeignKey(p => p.CategoriaId);
-
-            builder.ToTable("Categorias");
-        }
-    }
-
 }
