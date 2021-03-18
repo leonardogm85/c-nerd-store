@@ -33,7 +33,9 @@ namespace NerdStore.WebApp.Mvc
                 (options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddRazorPages();
 
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
 
@@ -65,7 +67,10 @@ namespace NerdStore.WebApp.Mvc
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Vitrine}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
