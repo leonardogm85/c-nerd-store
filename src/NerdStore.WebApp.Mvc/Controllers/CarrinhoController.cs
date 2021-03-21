@@ -18,11 +18,6 @@ namespace NerdStore.WebApp.Mvc.Controllers
             _mediatorHandler = mediatorHandler;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost("meu-carrinho")]
         public async Task<IActionResult> AdicionarItem(Guid id, int quantidade)
         {

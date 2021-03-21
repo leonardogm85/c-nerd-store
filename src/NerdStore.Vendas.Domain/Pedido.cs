@@ -13,15 +13,15 @@ namespace NerdStore.Vendas.Domain
             VoucherUtilizado = voucherUtilizado;
             Desconto = desconto;
             ValorTotal = valorTotal;
-            _pedidoItems = new List<PedidoItem>();
+            _pedidoItens = new List<PedidoItem>();
         }
 
         protected Pedido()
         {
-            _pedidoItems = new List<PedidoItem>();
+            _pedidoItens = new List<PedidoItem>();
         }
 
-        private readonly List<PedidoItem> _pedidoItems;
+        private readonly List<PedidoItem> _pedidoItens;
 
         public int Codigo { get; private set; }
         public Guid ClienteId { get; private set; }
@@ -32,7 +32,7 @@ namespace NerdStore.Vendas.Domain
         public DateTime DataCadastro { get; private set; }
         public PedidoStatus PedidoStatus { get; private set; }
 
-        public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
+        public IReadOnlyCollection<PedidoItem> PedidoItens => _pedidoItens;
 
         public Voucher Voucher { get; private set; }
 
@@ -68,13 +68,13 @@ namespace NerdStore.Vendas.Domain
 
             item.AssociarPedido(Id);
 
-            var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+            var itemExistente = _pedidoItens.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
 
             if (itemExistente == null) throw new DomainException("O item não pertence ao pedido.");
 
-            _pedidoItems.Remove(itemExistente);
+            _pedidoItens.Remove(itemExistente);
 
-            _pedidoItems.Add(item);
+            _pedidoItens.Add(item);
 
             CalcularValorPedido();
         }
@@ -83,11 +83,11 @@ namespace NerdStore.Vendas.Domain
         {
             if (!item.EhValido()) return;
 
-            var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+            var itemExistente = _pedidoItens.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
 
             if (itemExistente == null) throw new DomainException("O item não pertence ao pedido.");
 
-            _pedidoItems.Remove(itemExistente);
+            _pedidoItens.Remove(itemExistente);
 
             CalcularValorPedido();
         }
@@ -100,22 +100,22 @@ namespace NerdStore.Vendas.Domain
 
             if (PedidoItemExistente(item))
             {
-                var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+                var itemExistente = _pedidoItens.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
                 itemExistente.AdicionarUnidades(item.Quantidade);
                 item = itemExistente;
 
-                _pedidoItems.Remove(itemExistente);
+                _pedidoItens.Remove(itemExistente);
             }
 
             item.CalcularValor();
-            _pedidoItems.Add(item);
+            _pedidoItens.Add(item);
 
             CalcularValorPedido();
         }
 
         public bool PedidoItemExistente(PedidoItem item)
         {
-            return _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
+            return _pedidoItens.Any(p => p.ProdutoId == item.ProdutoId);
         }
 
         public void AplicarVoucher(Voucher voucher)
@@ -127,7 +127,7 @@ namespace NerdStore.Vendas.Domain
 
         public void CalcularValorPedido()
         {
-            ValorTotal = PedidoItems.Sum(p => p.CalcularValor());
+            ValorTotal = PedidoItens.Sum(p => p.CalcularValor());
             CalcularValorTotalDesconto();
         }
 
