@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NerdStore.Core.Communication.Mediator;
 using NerdStore.Core.Data;
 using NerdStore.Core.Messages;
 using NerdStore.Vendas.Domain;
@@ -10,8 +11,11 @@ namespace NerdStore.Vendas.Data
 {
     public class VendasContext : DbContext, IUnitOfWork
     {
-        public VendasContext(DbContextOptions<VendasContext> options) : base(options)
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public VendasContext(DbContextOptions<VendasContext> options, IMediatorHandler mediatorHandler) : base(options)
         {
+            _mediatorHandler = mediatorHandler;
         }
 
         public DbSet<Pedido> Pedidos { get; set; }
@@ -54,7 +58,14 @@ namespace NerdStore.Vendas.Data
                 }
             }
 
-            return await SaveChangesAsync() > 0;
+            if (await SaveChangesAsync() > 0)
+            {
+                await _mediatorHandler.PublicarEventos(this);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
