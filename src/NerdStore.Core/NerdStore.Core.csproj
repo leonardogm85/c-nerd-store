@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.5.3" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <Compile Remove="Messages\CommonMessages\IntegrationEvents\**" />
+    <EmbeddedResource Remove="Messages\CommonMessages\IntegrationEvents\**" />
+    <None Remove="Messages\CommonMessages\IntegrationEvents\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Messages\CommonMessages\IntegrationEvents\" />
+    <PackageReference Include="FluentValidation" Version="9.5.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

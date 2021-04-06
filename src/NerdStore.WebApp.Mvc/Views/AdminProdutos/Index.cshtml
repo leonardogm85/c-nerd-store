@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<NerdStore.Catalogo.Application.ViewModels.ProdutoViewModel>
 
-@{ ViewData["Title"] = "Vitrine"; }
+@{
+    ViewData["Title"] = "Vitrine";
+}
 
 <style>
     h4 {
@@ -70,7 +72,8 @@
     <hr />
     <div class="row">
         @foreach (var produto in Model.OrderBy(p => p.CategoriaId))
-        {<div class="col-md-3 col-sm-6">
+        {
+            <div class="col-md-3 col-sm-6">
                 <span class="thumbnail">
                     <img width="200" height="200" src="~/Images/@produto.Imagem" />
                     <h4>@produto.Nome</h4>
@@ -83,6 +86,7 @@
                         <a asp-controller="AdminProdutos" asp-action="AtualizarEstoque" asp-route-id="@produto.Id" class="btn btn-info right">Estoque</a>
                     </div>
                 </span>
-            </div>}
+            </div>
+        }
     </div>
 </div>
