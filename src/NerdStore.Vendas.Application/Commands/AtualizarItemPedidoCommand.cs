@@ -28,10 +28,18 @@ namespace NerdStore.Vendas.Application.Commands
     {
         public AtualizarItemPedidoValidation()
         {
-            RuleFor(c => c.ClienteId).NotEqual(Guid.Empty).WithMessage("Id do Cliente inválido.");
-            RuleFor(c => c.ProdutoId).NotEqual(Guid.Empty).WithMessage("Id do produto inválido.");
-            RuleFor(c => c.Quantidade).GreaterThan(0).WithMessage("A quantidade mínima de um item é 1");
-            RuleFor(c => c.Quantidade).LessThan(15).WithMessage("A quantidade máxima de um item é 15");
+            RuleFor(c => c.ClienteId)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do Cliente inválido.");
+            RuleFor(c => c.ProdutoId)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do produto inválido.");
+            RuleFor(c => c.Quantidade)
+                .GreaterThan(0)
+                .WithMessage("A quantidade mínima de um item é 1");
+            RuleFor(c => c.Quantidade)
+                .LessThan(15)
+                .WithMessage("A quantidade máxima de um item é 15");
         }
     }
 }

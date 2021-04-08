@@ -26,8 +26,12 @@ namespace NerdStore.Vendas.Application.Commands
     {
         public AplicarVoucherPedidoValidation()
         {
-            RuleFor(c => c.ClienteId).NotEqual(Guid.Empty).WithMessage("Id do Cliente inválido.");
-            RuleFor(c => c.CodigoVoucher).NotEmpty().WithMessage("O código do voucher não pode ser vazio.");
+            RuleFor(c => c.ClienteId)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do Cliente inválido.");
+            RuleFor(c => c.CodigoVoucher)
+                .NotEmpty()
+                .WithMessage("O código do voucher não pode ser vazio.");
         }
     }
 }

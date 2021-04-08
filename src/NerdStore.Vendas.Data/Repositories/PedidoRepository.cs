@@ -39,7 +39,7 @@ namespace NerdStore.Vendas.Data.Repositories
                 .Collection(p => p.PedidoItens)
                 .LoadAsync();
 
-            if (pedido.Voucher != null)
+            if (pedido.VoucherId != null)
             {
                 await _context.Entry(pedido)
                 .Reference(p => p.Voucher)

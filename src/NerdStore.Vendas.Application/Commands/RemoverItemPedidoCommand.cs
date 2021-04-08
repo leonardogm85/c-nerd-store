@@ -26,8 +26,12 @@ namespace NerdStore.Vendas.Application.Commands
     {
         public RemoverItemPedidoValidation()
         {
-            RuleFor(c => c.ClienteId).NotEqual(Guid.Empty).WithMessage("Id do Cliente inválido.");
-            RuleFor(c => c.ProdutoId).NotEqual(Guid.Empty).WithMessage("Id do produto inválido.");
+            RuleFor(c => c.ClienteId)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do Cliente inválido.");
+            RuleFor(c => c.ProdutoId)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do produto inválido.");
         }
     }
 }
