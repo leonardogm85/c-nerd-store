@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace NerdStore.Pagamentos.Data
 {
-    public class PagamentosContext : DbContext, IUnitOfWork
+    public class PagamentoContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
 
-        public PagamentosContext(DbContextOptions<PagamentosContext> options, IMediatorHandler mediatorHandler) : base(options)
+        public PagamentoContext(DbContextOptions<PagamentoContext> options, IMediatorHandler mediatorHandler) : base(options)
         {
-            _mediatorHandler = mediatorHandler ?? throw new ArgumentNullException(nameof(mediatorHandler));
+            _mediatorHandler = mediatorHandler;
         }
 
         public DbSet<Pagamento> Pagamentos { get; set; }
@@ -30,7 +30,7 @@ namespace NerdStore.Pagamentos.Data
 
             modelBuilder.Ignore<Event>();
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PagamentosContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PagamentoContext).Assembly);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

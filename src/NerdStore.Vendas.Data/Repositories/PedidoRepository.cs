@@ -21,17 +21,21 @@ namespace NerdStore.Vendas.Data.Repositories
 
         public async Task<Pedido> ObterPorId(Guid id)
         {
-            return await _context.Pedidos.FindAsync(id);
+            return await _context.Pedidos
+                .FirstOrDefaultAsync(pedido => pedido.Id == id);
         }
 
         public async Task<IEnumerable<Pedido>> ObterListaPorClienteId(Guid clienteId)
         {
-            return await _context.Pedidos.AsNoTracking().Where(p => p.ClienteId == clienteId).ToListAsync();
+            return await _context.Pedidos
+                .Where(p => p.ClienteId == clienteId)
+                .ToListAsync();
         }
 
         public async Task<Pedido> ObterPedidoRascunhoPorClienteId(Guid clienteId)
         {
-            var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.ClienteId == clienteId && p.PedidoStatus == PedidoStatus.Rascunho);
+            var pedido = await _context.Pedidos
+                .FirstOrDefaultAsync(p => p.ClienteId == clienteId && p.PedidoStatus == PedidoStatus.Rascunho);
 
             if (pedido == null) return null;
 
@@ -61,12 +65,14 @@ namespace NerdStore.Vendas.Data.Repositories
 
         public async Task<PedidoItem> ObterItemPorId(Guid id)
         {
-            return await _context.PedidoItens.FindAsync(id);
+            return await _context.PedidoItens
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<PedidoItem> ObterItemPorPedido(Guid pedidoId, Guid produtoId)
         {
-            return await _context.PedidoItens.FirstOrDefaultAsync(p => p.PedidoId == pedidoId && p.ProdutoId == produtoId);
+            return await _context.PedidoItens
+                .FirstOrDefaultAsync(p => p.PedidoId == pedidoId && p.ProdutoId == produtoId);
         }
 
         public void AdicionarItem(PedidoItem pedidoItem)
@@ -86,7 +92,8 @@ namespace NerdStore.Vendas.Data.Repositories
 
         public async Task<Voucher> ObterVoucherPorCodigo(string codigo)
         {
-            return await _context.Vouchers.FirstOrDefaultAsync(p => p.Codigo == codigo);
+            return await _context.Vouchers
+                .FirstOrDefaultAsync(p => p.Codigo == codigo);
         }
 
         public void Dispose()

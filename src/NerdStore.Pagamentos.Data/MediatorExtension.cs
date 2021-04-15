@@ -7,7 +7,7 @@ namespace NerdStore.Pagamentos.Data
 {
     public static class MediatorExtension
     {
-        public static async Task PublicarEventos(this IMediatorHandler mediator, PagamentosContext context)
+        public static async Task PublicarEventos(this IMediatorHandler mediator, PagamentoContext context)
         {
             var domainEntities = context.ChangeTracker
                 .Entries<Entity>()

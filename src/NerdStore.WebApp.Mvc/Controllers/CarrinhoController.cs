@@ -121,10 +121,10 @@ namespace NerdStore.WebApp.Mvc.Controllers
                 carrinho.PedidoId,
                 ClienteId,
                 carrinho.ValorTotal,
-                carrinho.Pagamento.NomeCartao,
-                carrinho.Pagamento.NumeroCartao,
-                carrinho.Pagamento.ExpiracaoCartao,
-                carrinho.Pagamento.CvvCartao);
+                carrinhoViewModel.Pagamento.NomeCartao,
+                carrinhoViewModel.Pagamento.NumeroCartao,
+                carrinhoViewModel.Pagamento.ExpiracaoCartao,
+                carrinhoViewModel.Pagamento.CvvCartao);
 
             await _mediatorHandler.EnviarComando(command);
 

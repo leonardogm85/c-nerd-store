@@ -71,7 +71,7 @@ namespace NerdStore.Catalogo.Domain
         {
             foreach (var item in lista.Itens)
             {
-                if (!await DebitarItemEstoque(item.Id, item.Quantidade)) return false;
+                if (!await ReporItemEstoque(item.Id, item.Quantidade)) return false;
             }
 
             return await _produtoRepository.UnitOfWork.Commit();
