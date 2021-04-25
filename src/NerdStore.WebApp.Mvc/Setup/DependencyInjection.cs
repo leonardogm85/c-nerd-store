@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EventSourcing;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStore.Catalogo.Application.Services;
 using NerdStore.Catalogo.Data;
@@ -72,6 +73,9 @@ namespace NerdStore.WebApp.Mvc.Setup
             services.AddScoped<PagamentoContext>();
 
             services.AddScoped<INotificationHandler<PedidoEstoqueConfirmadoEvent>, PagamentoEventHandler>();
+
+            // Event Sourcing
+            services.AddSingleton<IEventStoreService, EventStoreService>();
         }
     }
 }
