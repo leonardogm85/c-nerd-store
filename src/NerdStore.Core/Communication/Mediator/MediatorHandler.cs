@@ -27,8 +27,7 @@ namespace NerdStore.Core.Communication.Mediator
         {
             await _mediator.Publish(evento);
 
-            // TODO: Implementar o Event Sourcing
-            //await _eventSourcingRepository.SalvarEvento(evento);
+            await _eventSourcingRepository.SalvarEvento(evento);
         }
 
         public async Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification
