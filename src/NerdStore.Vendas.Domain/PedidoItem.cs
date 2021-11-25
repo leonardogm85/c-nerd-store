@@ -25,8 +25,6 @@ namespace NerdStore.Vendas.Domain
 
         public Pedido Pedido { get; private set; }
 
-
-
         internal void AssociarPedido(Guid pedidoId)
         {
             PedidoId = pedidoId;
