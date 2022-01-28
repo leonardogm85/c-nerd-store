@@ -37,7 +37,7 @@
                                     <form method="post" asp-controller="Carrinho" asp-action="AtualizarItem">
                                         <input type="hidden" id="Id" name="Id" value="@item.ProdutoId" />
                                         <div class="row" style="float: left">
-                                            <input style="width: 70px" type="text" class="form-control" name="quantidade" id="quantidade" value="@item.Quantidade">
+                                            <input style="width: 70px" type="text" class="form-control" name="quantidade" id="Quantidade" value="@item.Quantidade">
                                         </div>
                                         <div class="row" style="float: right">
                                             <button type="submit" class="btn btn-success">
@@ -46,8 +46,8 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.ValorUnitario.ToString("C")</strong></td>
-                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.ValorTotal.ToString("C")</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong id="ValorUnitario">@item.ValorUnitario.ToString("C")</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong id="ValorTotal">@item.ValorTotal.ToString("C")</strong></td>
                                 <td class="col-sm-1 col-md-1">
                                     <form method="post" asp-controller="Carrinho" asp-action="RemoverItem">
                                         <input type="hidden" id="Id" name="Id" value="@item.ProdutoId" />
@@ -64,7 +64,7 @@
                             <td> </td>
                             <td> </td>
                             <td><h5>Subtotal</h5></td>
-                            <td class="text-right"><h5><strong>@Model.SubTotal.ToString("C")</strong></h5></td>
+                            <td class="text-right"><h5><strong id="ValorSubtotalCarrinho">@Model.SubTotal.ToString("C")</strong></h5></td>
                         </tr>
                         <tr>
                             <td> </td>
@@ -81,7 +81,7 @@
                                 </form>
                             </td>
                             <td><h5>Desconto</h5></td>
-                            <td class="text-right"><h5><strong>@Model.ValorDesconto.ToString("C")</strong></h5></td>
+                            <td class="text-right"><h5><strong id="ValorDescontoCarrinho">@Model.ValorDesconto.ToString("C")</strong></h5></td>
                         </tr>
                         <tr>
                             <td> </td>
@@ -91,7 +91,7 @@
                                 <h3>Total</h3>
                             </td>
                             <td class="text-right">
-                                <h3><strong>@Model.ValorTotal.ToString("C")</strong></h3>
+                                <h3><strong id="ValorTotalCarrinho">@Model.ValorTotal.ToString("C")</strong></h3>
                             </td>
                         </tr>
                         <tr>

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NerdStore.Core.Communication.Mediator;
 using NerdStore.Core.Messages.CommonMessages.Notifications;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.Mvc.Controllers
 {
+    [Authorize]
     public class PedidoController : ControllerBase
     {
         private readonly IPedidoQueries _pedidoQueries;

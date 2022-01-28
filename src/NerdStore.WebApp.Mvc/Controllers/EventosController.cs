@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NerdStore.Core.Data.EventSourcing;
 using System;
 using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.Mvc.Controllers
 {
+    [Authorize]
     public class EventosController : Controller
     {
         private readonly IEventSourcingRepository _eventSourcingRepository;

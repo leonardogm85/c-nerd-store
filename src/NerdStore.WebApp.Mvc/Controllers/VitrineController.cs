@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NerdStore.Catalogo.Application.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.Mvc.Controllers
 {
+    [AllowAnonymous]
     public class VitrineController : Controller
     {
         private readonly IProdutoAppService _produtoAppService;

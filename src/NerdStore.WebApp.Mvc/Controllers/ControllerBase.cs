@@ -36,5 +36,23 @@ namespace NerdStore.WebApp.Mvc.Controllers
         {
             return _notifications.ObterNotificacoes().Select(n => n.Value).ToList();
         }
+
+        protected new IActionResult Response(object result = null)
+        {
+            if (OperacaoValida())
+            {
+                return Ok(new
+                {
+                    success = true,
+                    data = result
+                });
+            }
+
+            return BadRequest(new
+            {
+                success = false,
+                data = _notifications.ObterNotificacoes().Select(n => n.Value)
+            });
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NerdStore.Catalogo.Application.Services;
 using NerdStore.Core.Communication.Mediator;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.Mvc.Controllers
 {
+    [Authorize]
     public class CarrinhoController : ControllerBase
     {
         private readonly IProdutoAppService _produtoAppService;
@@ -41,6 +43,12 @@ namespace NerdStore.WebApp.Mvc.Controllers
             if (produto.QuantidadeEstoque < quantidade)
             {
                 TempData["Erro"] = "Produto com estoque insuficiente.";
+                return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
+            }
+
+            if (quantidade > 15)
+            {
+                TempData["Erro"] = "A quantidade máxima de um item é 15.";
                 return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
             }
 

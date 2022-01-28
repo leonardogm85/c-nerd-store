@@ -6,11 +6,11 @@ namespace NerdStore.Catalogo.Domain.Tests
 {
     public class ProdutoTests
     {
-        [Fact]
+        [Fact(DisplayName = "Catalogo - Validar Produto")]
+        [Trait("Categoria", "NerdStore.Catalogo.Domain")]
         public void Produto_Validar_ValidacoesDevemRetornarExceptions()
         {
             // Arrange & Act & Assert
-
             var ex = Assert.Throws<DomainException>(() =>
                 new Produto(
                     string.Empty,
